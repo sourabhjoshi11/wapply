@@ -1,0 +1,42 @@
+# Python
+.venv
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+.next/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+
+# Env (secrets)
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.err
+
+# Docker
+.dockerignore
+
+# OpenCode session state
+.omo/
+
+# Playwright recordings
+.playwright-mcp/
+
+# Screenshots & temp
+*.png

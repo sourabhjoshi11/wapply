@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitchen Display</title>
+<script src="https://unpkg.com/@supabase/supabase-js@2.49.4/dist/umd/supabase.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow-x:hidden}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  background:#0d1117;color:#e6edf3;min-height:100vh;display:flex;flex-direction:column
+}
+header{
+  background:#161b22;padding:16px 24px;border-bottom:1px solid #30363d;
+  display:flex;justify-content:space-between;align-items:center;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.4)
+}
+header h1{font-size:1.5rem;font-weight:700;letter-spacing:.5px}
+header h1 span{color:#58a6ff}
+header .badge{font-size:.75rem;background:#21262d;padding:4px 12px;border-radius:12px;color:#8b949e}
+main{padding:20px;flex:1;max-width:1600px;margin:0 auto;width:100%}
+#orders-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+.empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;color:#484f58}
+.empty-state .icon{font-size:3rem;margin-bottom:12px;opacity:.5}
+.empty-state p{font-size:1.1rem}
+.order-card{
+  background:#161b22;border-radius:12px;padding:20px;position:relative;
+  border:1px solid #30363d;
+  animation:slideIn .35s ease-out forwards;
+  transition:opacity .5s ease,transform .5s ease;
+  display:flex;flex-direction:column;gap:12px;
+  box-shadow:0 4px 16px rgba(0,0,0,.3)
+}
+.order-card.fade-out{opacity:0;transform:translateX(80px)}
+.order-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.table-number{font-size:2rem;font-weight:800;color:#f0f6fc;line-height:1}
+.order-meta{text-align:right;flex-shrink:0}
+.timer{font-size:.85rem;color:#8b949e;font-variant-numeric:tabular-nums}
+.status-badge{display:inline-block;font-size:.7rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.8px;padding:4px 10px;border-radius:6px;margin-top:4px}
+.status-new{background:rgba(248,81,73,.2);color:#f85149;border:1px solid rgba(248,81,73,.4)}
+.status-preparing{background:rgba(210,153,34,.2);color:#d99a22;border:1px solid rgba(210,153,34,.4)}
+.status-ready{background:rgba(63,185,80,.2);color:#3fb950;border:1px solid rgba(63,185,80,.4)}
+.order-card.pulse-new{animation:newPulse 2s ease-in-out infinite}
+@keyframes newPulse{
+  0%,100%{border-color:#30363d;box-shadow:0 0 0 rgba(248,81,73,0)}
+  50%{border-color:#f85149;box-shadow:0 0 24px rgba(248,81,73,.25)}
+}
+@keyframes slideIn{
+  from{opacity:0;transform:translateX(60px)}
+  to{opacity:1;transform:translateX(0)}
+}
+.items-section{flex:1}
+.items-section h3{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:#8b949e;margin-bottom:8px}
+.item-row{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid #21262d;gap:8px}
+.item-row:last-child{border-bottom:none}
+.item-name{font-size:.95rem;font-weight:500}
+.item-qty{font-size:.8rem;color:#8b949e;background:#21262d;padding:1px 8px;border-radius:4px;flex-shrink:0}
+.customizations{font-size:.8rem;color:#8b949e;padding-left:12px;margin-top:2px}
+.customizations::before{content:"— ";color:#484f58}
+.actions{display:flex;gap:8px;margin-top:4px}
+.actions button{
+  flex:1;padding:10px 12px;border:none;border-radius:8px;
+  font-size:.8rem;font-weight:600;cursor:pointer;
+  transition:all .15s ease;text-transform:uppercase;letter-spacing:.5px
+}
+.actions button:active{transform:scale(.96)}
+.btn-preparing{background:#d99a22;color:#0d1117}
+.btn-preparing:hover{background:#e3b341}
+.btn-ready{background:#3fb950;color:#0d1117}
+.btn-ready:hover{background:#56d36e}
+.btn-served{background:#8b949e;color:#0d1117}
+.btn-served:hover{background:#a5aeb9}
+.actions button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+footer{
+  padding:12px 24px;text-align:center;font-size:.75rem;color:#484f58;
+  border-top:1px solid #21262d;background:#161b22
+}
+#connection-status{
+  display:inline-flex;align-items:center;gap:6px;padding:3px 10px;
+  border-radius:10px;font-size:.7rem;font-weight:500
+}
+#connection-status.connected{background:rgba(63,185,80,.15);color:#3fb950}
+#connection-status.disconnected{background:rgba(248,81,73,.15);color:#f85149}
+#connection-status.connecting{background:rgba(210,153,34,.15);color:#d99a22}
+@media(max-width:768px){
+  header{padding:12px 16px;flex-wrap:wrap;gap:8px}
+  header h1{font-size:1.15rem}
+  main{padding:12px}
+  #orders-grid{grid-template-columns:1fr}
+  .table-number{font-size:1.6rem}
+}
+@media(max-width:480px){
+  .actions{flex-direction:column}
+  .order-card-header{flex-direction:column}
+  .order-meta{text-align:left;width:100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>🍳 <span id="shop-name">KITCHEN DISPLAY</span></h1>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span id="connection-status" class="connecting">⟳ connecting</span>
+    <span class="badge" id="order-count">0 orders</span>
+  </div>
+</header>
+<main>
+  <div id="orders-grid">
+    <div class="empty-state">
+      <div class="icon">🍽️</div>
+      <p>No active orders</p>
+    </div>
+  </div>
+</main>
+<footer>Last refresh: <span id="last-refresh">—</span></footer>
+
+<script>
+(function(){
+  const SUPABASE_URL = 'https://ojmncjuzpuukooinncou.supabase.co';
+  const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY';
+
+  const params = new URLSearchParams(window.location.search);
+  const SHOP_ID = params.get('shop_id');
+  if (!SHOP_ID) {
+    document.getElementById('shop-name').textContent = 'NO SHOP_ID';
+    document.getElementById('orders-grid').innerHTML =
+      '<div class="empty-state"><div class="icon">⚠️</div><p>Missing ?shop_id= parameter</p></div>';
+    return;
+  }
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    realtime: { heartbeatIntervalMs: 15000 }
+  });
+
+  const grid = document.getElementById('orders-grid');
+  const shopNameEl = document.getElementById('shop-name');
+  const orderCountEl = document.getElementById('order-count');
+  const lastRefreshEl = document.getElementById('last-refresh');
+  const connStatus = document.getElementById('connection-status');
+  let ordersMap = {};
+  let timerInterval;
+  let audioCtx = null;
+
+  function updateConnectionState(state) {
+    const el = connStatus;
+    el.className = state;
+    if (state === 'connected') { el.textContent = '● connected'; }
+    else if (state === 'disconnected') { el.textContent = '● disconnected'; }
+    else { el.textContent = '⟳ connecting'; }
+  }
+
+  function playBeep() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.type = 'sine'; osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+      osc.start(); osc.stop(audioCtx.currentTime + 0.4);
+    } catch(e) {/* audio not critical */}
+  }
+
+  function formatTimer(iso) {
+    const diff = Date.now() - new Date(iso).getTime();
+    if (diff < 0) return '0s';
+    const s = Math.floor(diff / 1000);
+    const m = Math.floor(s / 60);
+    const h = Math.floor(m / 60);
+    if (h > 0) return `${h}h ${m % 60}m`;
+    if (m > 0) return `${m}m ${s % 60}s`;
+    return `${s}s`;
+  }
+
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  function renderCards() {
+    const ids = Object.keys(ordersMap);
+    if (ids.length === 0) {
+      grid.innerHTML = '<div class="empty-state"><div class="icon">🍽️</div><p>No active orders</p></div>';
+      orderCountEl.textContent = '0 orders';
+      return;
+    }
+    orderCountEl.textContent = ids.length + ' order' + (ids.length !== 1 ? 's' : '');
+
+    let html = '';
+    const sorted = ids
+      .map(id => ordersMap[id])
+      .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+
+    for (const order of sorted) {
+      const timer = formatTimer(order.created_at);
+      const statusClass = order.status === 'new' ? 'status-new'
+        : order.status === 'preparing' ? 'status-preparing'
+        : 'status-ready';
+      const pulseClass = order.status === 'new' ? 'pulse-new' : '';
+
+      let itemsHtml = '';
+      if (order.items && Array.isArray(order.items)) {
+        for (const item of order.items) {
+          const name = escapeHtml(item.name || item.product_name || 'Item');
+          const qty = item.quantity || 1;
+          const cust = item.customizations
+            ? '<div class="customizations">' + escapeHtml(String(item.customizations)) + '</div>'
+            : '';
+          itemsHtml += '<div class="item-row"><span class="item-name">' + name + cust + '</span><span class="item-qty">×' + qty + '</span></div>';
+        }
+      } else if (typeof order.items === 'string') {
+        try {
+          const parsed = JSON.parse(order.items);
+          if (Array.isArray(parsed)) {
+            for (const item of parsed) {
+              const name = escapeHtml(item.name || item.product_name || 'Item');
+              const qty = item.quantity || 1;
+              const cust = item.customizations
+                ? '<div class="customizations">' + escapeHtml(String(item.customizations)) + '</div>'
+                : '';
+              itemsHtml += '<div class="item-row"><span class="item-name">' + name + cust + '</span><span class="item-qty">×' + qty + '</span></div>';
+            }
+          }
+        } catch(e) {}
+      }
+
+      const tableNum = escapeHtml(String(order.table_number || order.table_no || '—'));
+      const disabled = order.status !== 'new' ? '' : '';
+      const prepDisabled = order.status === 'new' ? '' : 'disabled';
+      const readyDisabled = order.status === 'preparing' ? '' : 'disabled';
+      const servedDisabled = order.status === 'ready' ? '' : 'disabled';
+
+      html += '<div class="order-card ' + pulseClass + '" data-id="' + order.id + '">'
+        + '<div class="order-card-header">'
+        + '<div class="table-number">Table ' + tableNum + '</div>'
+        + '<div class="order-meta">'
+        + '<div class="timer">' + timer + '</div>'
+        + '<div class="status-badge ' + statusClass + '">' + order.status + '</div>'
+        + '</div></div>'
+        + '<div class="items-section"><h3>Items</h3>' + itemsHtml + '</div>'
+        + '<div class="actions">'
+        + '<button class="btn-preparing" data-action="preparing" data-id="' + order.id + '" ' + prepDisabled + '>Preparing</button>'
+        + '<button class="btn-ready" data-action="ready" data-id="' + order.id + '" ' + readyDisabled + '>Ready</button>'
+        + '<button class="btn-served" data-action="served" data-id="' + order.id + '" ' + servedDisabled + '>Served</button>'
+        + '</div></div>';
+    }
+    grid.innerHTML = html;
+    updateTimerDisplays();
+    attachButtonListeners();
+    updateLastRefresh();
+  }
+
+  function attachButtonListeners() {
+    grid.querySelectorAll('.actions button').forEach(btn => {
+      btn.addEventListener('click', async function() {
+        const id = this.dataset.id;
+        const action = this.dataset.action;
+        this.disabled = true;
+        try {
+          const { error } = await supabase
+            .from('kitchen_orders')
+            .update({ status: action, updated_at: new Date().toISOString() })
+            .eq('id', id);
+          if (error) throw error;
+        } catch(e) {
+          console.error('Failed to update order status:', e);
+          this.disabled = false;
+        }
+      });
+    });
+  }
+
+  function updateTimerDisplays() {
+    document.querySelectorAll('.order-card').forEach(card => {
+      const id = card.dataset.id;
+      const order = ordersMap[id];
+      if (!order) return;
+      const timerEl = card.querySelector('.timer');
+      if (timerEl) timerEl.textContent = formatTimer(order.created_at);
+    });
+  }
+
+  function updateLastRefresh() {
+    lastRefreshEl.textContent = new Date().toLocaleTimeString();
+  }
+
+  function upsertOrder(order) {
+    const id = order.id;
+    if (!id) return;
+    if (order.status === 'served') {
+      if (ordersMap[id]) {
+        delete ordersMap[id];
+        const card = document.querySelector('.order-card[data-id="' + id + '"]');
+        if (card) {
+          card.classList.add('fade-out');
+          setTimeout(() => { renderCards(); }, 500);
+        } else {
+          renderCards();
+        }
+      }
+      return;
+    }
+    if (['new','preparing','ready'].indexOf(order.status) === -1) return;
+    const isNew = !ordersMap[id];
+    ordersMap[id] = order;
+    renderCards();
+    if (isNew) playBeep();
+  }
+
+  async function loadInitialOrders() {
+    try {
+      const { data, error } = await supabase
+        .from('kitchen_orders')
+        .select('*')
+        .eq('shop_id', SHOP_ID)
+        .in('status', ['new','preparing','ready'])
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      if (data) {
+        for (const order of data) { ordersMap[order.id] = order; }
+        renderCards();
+      }
+    } catch(e) {
+      console.error('Failed to load orders:', e);
+      grid.innerHTML = '<div class="empty-state"><div class="icon">❌</div><p>Failed to load orders</p></div>';
+    }
+  }
+
+  async function loadShopName() {
+    try {
+      const { data, error } = await supabase
+        .from('shops')
+        .select('name')
+        .eq('id', SHOP_ID)
+        .single();
+      if (error) throw error;
+      if (data && data.name) {
+        shopNameEl.textContent = data.name.toUpperCase();
+        document.title = 'Kitchen - ' + data.name;
+      }
+    } catch(e) {
+      console.warn('Could not load shop name:', e);
+      shopNameEl.textContent = 'KITCHEN DISPLAY';
+    }
+  }
+
+  function setupRealtime() {
+    const channel = supabase.channel('kitchen-orders-' + SHOP_ID, {
+      config: { broadcast: { self: false } }
+    });
+
+    channel.on(
+      'postgres_changes',
+      {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'kitchen_orders',
+        filter: 'shop_id=eq.' + SHOP_ID
+      },
+      payload => { upsertOrder(payload.new); }
+    );
+
+    channel.on(
+      'postgres_changes',
+      {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'kitchen_orders',
+        filter: 'shop_id=eq.' + SHOP_ID
+      },
+      payload => { upsertOrder(payload.new); }
+    );
+
+    channel.subscribe(status => {
+      if (status === 'SUBSCRIBED') updateConnectionState('connected');
+      else if (status === 'CHANNEL_ERROR') updateConnectionState('disconnected');
+      else updateConnectionState('connecting');
+    });
+
+    channel.onError(() => updateConnectionState('disconnected'));
+  }
+
+  function init() {
+    if (SUPABASE_ANON_KEY === 'SUPABASE_ANON_KEY') {
+      grid.innerHTML = '<div class="empty-state"><div class="icon">🔑</div><p>Replace SUPABASE_ANON_KEY in the HTML with your actual Supabase anon key</p></div>';
+      shopNameEl.textContent = 'CONFIG NEEDED';
+      return;
+    }
+    loadShopName();
+    loadInitialOrders();
+    setupRealtime();
+    timerInterval = setInterval(updateTimerDisplays, 1000);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) updateLastRefresh();
+    });
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

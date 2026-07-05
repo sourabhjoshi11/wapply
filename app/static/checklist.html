@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Checklist — Wapply</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { display: ['"DM Serif Display"', 'serif'], body: ['"DM Sans"', 'sans-serif'] },
+          colors: { brand: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 300: '#86efac', 400: '#4ade80', 500: '#059669', 600: '#047857', 700: '#065f46', 800: '#064e3b', 900: '#022c22' }, earth: { 50: '#faf8f5', 100: '#f0ede6', 200: '#e0d9cc', 300: '#c5b99f', 400: '#a69372', 500: '#8b7a5e', 600: '#6f614a', 700: '#5a4e3d', 800: '#4a4133', 900: '#3d352b' } }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #faf8f5; color: #1c1917; }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #059669;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    .item-row {
+      transition: background 0.15s ease;
+    }
+
+    .item-row:hover {
+      background: #f0fdf4;
+    }
+
+    .price-input::-webkit-outer-spin-button,
+    .price-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .price-input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    .sticky-footer {
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeUp 0.4s ease-out forwards; }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <!-- Loading state -->
+    <div id="loading" class="min-h-screen flex items-center justify-center">
+      <div class="text-center">
+        <div class="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mx-auto mb-4"></div>
+        <p class="text-earth-500 text-sm">Loading your checklist...</p>
+      </div>
+    </div>
+
+    <!-- Content (hidden until loaded) -->
+    <div id="content" class="hidden min-h-screen flex flex-col">
+
+      <!-- Header -->
+      <header class="bg-white border-b border-earth-200 sticky top-0 z-20">
+        <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div>
+            <h1 class="font-display text-xl text-brand-900">Quick Setup</h1>
+            <p id="shop-name" class="text-sm text-earth-500 mt-0.5">Shop Name</p>
+          </div>
+          <span id="category-badge" class="text-xs bg-brand-100 text-brand-700 font-semibold px-3 py-1 rounded-full">Category</span>
+        </div>
+      </header>
+
+      <!-- Main -->
+      <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-6">
+        <!-- Search -->
+        <div class="mb-5">
+          <input id="search" type="text" placeholder="Search items..." 
+                 class="form-input w-full bg-white border border-earth-200 rounded-xl px-4 py-3 text-sm transition-all" />
+        </div>
+
+        <!-- Progress bar -->
+        <div class="mb-5 flex items-center gap-3">
+          <div class="flex-1 h-2 bg-earth-200 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-brand-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <span id="progress-count" class="text-xs text-earth-500 font-medium whitespace-nowrap">0 selected</span>
+        </div>
+
+        <!-- Info banner -->
+        <div class="bg-brand-50 border border-brand-100 rounded-xl px-4 py-3 mb-5 text-sm text-brand-800">
+          <strong>Tick the items</strong> you sell and add their prices. Only checked items will be added to your catalog. You can always add more later via WhatsApp.
+        </div>
+
+        <!-- Items list -->
+        <div id="items-list" class="space-y-1"></div>
+
+        <!-- Empty state (search) -->
+        <div id="empty-search" class="hidden text-center py-12 text-earth-400">
+          <p class="text-sm">No items match your search.</p>
+        </div>
+
+        <!-- Bottom padding -->
+        <div class="h-24"></div>
+      </main>
+
+      <!-- Sticky footer with submit -->
+      <footer class="sticky-footer bg-white border-t border-earth-200 px-4 py-4">
+        <div class="max-w-3xl mx-auto flex items-center justify-between gap-4">
+          <span id="submit-count" class="text-sm text-earth-600">0 items selected</span>
+          <button id="submit-btn"
+                  class="bg-brand-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm shadow-lg shadow-brand-600/20 flex items-center gap-2">
+            <span id="btn-text">Save to Catalog</span>
+            <svg id="btn-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Success view (hidden until submit) -->
+    <div id="success" class="hidden min-h-screen flex items-center justify-center px-4">
+      <div class="text-center max-w-md animate-fade-up">
+        <div class="w-16 h-16 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="text-2xl font-display text-brand-900 mb-2">Your Catalog is Ready! 🎉</h2>
+        <p class="text-earth-600 text-sm mb-2" id="success-msg"></p>
+        <p class="text-earth-500 text-xs">Our team will activate your shop after Meta WhatsApp setup. You'll get a message on your registered number.</p>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div id="error" class="hidden min-h-screen flex items-center justify-center px-4">
+      <div class="text-center max-w-md">
+        <div class="w-16 h-16 rounded-full bg-red-100 text-red-500 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+        </div>
+        <h2 class="text-xl font-display text-brand-900 mb-2">Something went wrong</h2>
+        <p id="error-msg" class="text-earth-600 text-sm mb-4"></p>
+        <button onclick="location.reload()" class="bg-brand-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-brand-700 transition-all">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── State ──
+    const STORAGE_KEY = 'weai_checklist_';
+    let leadId = null;
+    let items = [];
+    let selections = {};
+
+    // ── Page load ──
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      leadId = params.get('lead_id');
+
+      if (!leadId) {
+        showError('Missing lead ID. Please use the link from your registration email.');
+        return;
+      }
+
+      // Restore saved selections
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY + leadId);
+        if (saved) selections = JSON.parse(saved);
+      } catch {}
+
+      try {
+        const res = await fetch(`/api/onboarding/checklist-data/${leadId}`);
+        if (!res.ok) throw new Error(await res.text());
+        const data = await res.json();
+
+        document.getElementById('shop-name').textContent = data.shop_name;
+        document.getElementById('category-badge').textContent = data.category;
+
+        items = data.items.map((name, idx) => ({
+          id: `item-${idx}`,
+          name: name,
+          price: selections[name] || '',
+        }));
+
+        renderItems();
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('content').classList.remove('hidden');
+        updateProgress();
+
+      } catch (err) {
+        showError('Could not load checklist. The link may be expired or invalid.');
+      }
+    });
+
+    // ── Render items ──
+    function renderItems() {
+      const container = document.getElementById('items-list');
+      const search = document.getElementById('search').value.toLowerCase().trim();
+      const empty = document.getElementById('empty-search');
+
+      let visible = 0;
+      container.innerHTML = '';
+
+      items.forEach((item) => {
+        const match = !search || item.name.toLowerCase().includes(search);
+        if (!match) return;
+        visible++;
+
+        const checked = selections[item.name] !== undefined && selections[item.name] !== '';
+        const div = document.createElement('div');
+        div.className = `item-row flex items-center gap-3 px-3 py-2.5 rounded-lg border ${checked ? 'border-brand-200 bg-brand-50/50' : 'border-transparent'}`;
+
+        div.innerHTML = `
+          <input type="checkbox" id="${item.id}" ${checked ? 'checked' : ''}
+                 class="w-4 h-4 rounded border-earth-300 text-brand-600 focus:ring-brand-500 cursor-pointer" />
+          <label for="${item.id}" class="flex-1 text-sm cursor-pointer select-none">${escapeHtml(item.name)}</label>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs text-earth-400">Rs</span>
+            <input type="number" step="1" min="0" placeholder="—"
+                   value="${item.price}"
+                   class="price-input w-20 text-right text-sm bg-white border border-earth-200 rounded-lg px-2 py-1.5 transition-all form-input" />
+          </div>
+        `;
+
+        const checkbox = div.querySelector('input[type="checkbox"]');
+        const priceInput = div.querySelector('input[type="number"]');
+
+        checkbox.addEventListener('change', () => {
+          if (!checkbox.checked) {
+            delete selections[item.name];
+            priceInput.value = '';
+          } else {
+            selections[item.name] = priceInput.value || '';
+          }
+          saveState();
+          updateProgress();
+          div.className = `item-row flex items-center gap-3 px-3 py-2.5 rounded-lg border ${checkbox.checked ? 'border-brand-200 bg-brand-50/50' : 'border-transparent'}`;
+        });
+
+        priceInput.addEventListener('input', () => {
+          if (checkbox.checked) {
+            selections[item.name] = priceInput.value;
+            saveState();
+          }
+        });
+
+        priceInput.addEventListener('focus', () => {
+          if (!checkbox.checked) {
+            checkbox.checked = true;
+            selections[item.name] = priceInput.value || '';
+            saveState();
+            updateProgress();
+            div.className = 'item-row flex items-center gap-3 px-3 py-2.5 rounded-lg border border-brand-200 bg-brand-50/50';
+          }
+        });
+
+        container.appendChild(div);
+      });
+
+      empty.classList.toggle('hidden', visible > 0);
+    }
+
+    // ── Search ──
+    document.getElementById('search').addEventListener('input', renderItems);
+
+    // ── Progress ──
+    function updateProgress() {
+      const count = Object.keys(selections).filter(k => selections[k] && selections[k] !== '').length;
+      const total = items.length;
+      const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+
+      document.getElementById('progress-bar').style.width = pct + '%';
+      document.getElementById('progress-count').textContent = `${count} selected`;
+      document.getElementById('submit-count').textContent = `${count} items with prices`;
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = count === 0;
+    }
+
+    // ── Submit ──
+    document.getElementById('submit-btn').addEventListener('click', async () => {
+      const products = Object.entries(selections)
+        .filter(([name, price]) => price && price !== '')
+        .map(([name, price]) => ({ name, price: parseFloat(price) }));
+
+      if (products.length === 0) return;
+
+      const btn = document.getElementById('submit-btn');
+      const btnText = document.getElementById('btn-text');
+      const spinner = document.getElementById('btn-spinner');
+      btn.disabled = true;
+      btnText.textContent = 'Saving...';
+      spinner.classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/onboarding/checklist-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lead_id: leadId, products }),
+        });
+
+        if (!res.ok) throw new Error(await res.text());
+
+        const data = await res.json();
+        localStorage.removeItem(STORAGE_KEY + leadId);
+        document.getElementById('content').classList.add('hidden');
+        document.getElementById('success-msg').textContent = 
+          `${data.products_inserted} products added to your shop.`;
+        document.getElementById('success').classList.remove('hidden');
+
+      } catch (err) {
+        showError('Failed to save. Please try again.');
+        btn.disabled = false;
+        btnText.textContent = 'Save to Catalog';
+        spinner.classList.add('hidden');
+      }
+    });
+
+    // ── Helpers ──
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY + leadId, JSON.stringify(selections));
+      } catch {}
+    }
+
+    function showError(msg) {
+      document.getElementById('error-msg').textContent = msg;
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.add('hidden');
+      document.getElementById('error').classList.remove('hidden');
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
