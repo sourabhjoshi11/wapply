@@ -1,5 +1,4 @@
 {
-  "outputDirectory": ".next",
   "buildCommand": "next build",
   "installCommand": "npm install"
 }
