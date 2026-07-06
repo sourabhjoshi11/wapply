@@ -29,9 +29,6 @@ Thumbs.db
 *.log
 *.err
 
-# Docker
-.dockerignore
-
 # OpenCode session state
 .omo/
 
