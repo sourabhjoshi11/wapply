@@ -50,6 +50,10 @@ class Settings:
         for o in os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
         if o.strip()
     ]
+    cors_origin_regex: str | None = os.getenv(
+        "CORS_ORIGIN_REGEX",
+        r"https://wapply(-[a-z0-9-]+)?\.vercel\.app"
+    )
 
     # Webhook secret for signature verification (different from app secret)
     whatsapp_webhook_secret: str = os.getenv(
