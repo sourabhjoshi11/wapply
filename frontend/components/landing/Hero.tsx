@@ -8,30 +8,29 @@ import { useTranslation } from '@/hooks/useTranslation';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
-const CHAT_MESSAGES = [
-  { text: 'Namaste! Kya aapke paas Biscuit hai?', sender: 'customer', delay: 0 },
-  { text: 'Ji haan! 🎉 Aap catalog dekh sakte hain', sender: 'bot', delay: 1500 },
-  { text: 'Mujhe 2 packet chahiye, ₹10 wale', sender: 'customer', delay: 3000 },
-  { text: 'Order confirm hai!', sender: 'bot', delay: 4500 },
-  { text: '✅ Order #ABC123 placed\nAapka order aa raha hai', sender: 'system', delay: 6000 },
-];
-
 export default function Hero() {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [videoOpen, setVideoOpen] = useState(false);
 
+  const chatMessages = t.hero.chatMessages || [];
+
+  // Reset animation when language changes
   useEffect(() => {
-    if (visibleMessages < CHAT_MESSAGES.length) {
+    setVisibleMessages(0);
+  }, [lang]);
+
+  useEffect(() => {
+    if (visibleMessages < chatMessages.length) {
       const timer = setTimeout(() => {
         setVisibleMessages((prev) => prev + 1);
-      }, CHAT_MESSAGES[visibleMessages]?.delay ?? 2000);
+      }, chatMessages[visibleMessages]?.delay ?? 2000);
       return () => clearTimeout(timer);
     }
     // Loop
     const resetTimer = setTimeout(() => setVisibleMessages(0), 10000);
     return () => clearTimeout(resetTimer);
-  }, [visibleMessages]);
+  }, [visibleMessages, chatMessages]);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
@@ -119,15 +118,15 @@ export default function Hero() {
                     W
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white truncate">Wapply Bot</p>
-                    <p className="text-xs text-gray-500">Online</p>
+                    <p className="text-sm font-medium text-white truncate">{t.hero.chatBotName}</p>
+                    <p className="text-xs text-gray-500">{t.hero.chatBotStatus}</p>
                   </div>
                 </div>
 
                 {/* Messages */}
                 <div className="p-4 space-y-3 min-h-[400px] bg-gray-900">
                   <AnimatePresence mode="popLayout">
-                    {CHAT_MESSAGES.slice(0, visibleMessages).map((msg, i) => (
+                    {chatMessages.slice(0, visibleMessages).map((msg, i) => (
                       <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -158,7 +157,7 @@ export default function Hero() {
                     ))}
                   </AnimatePresence>
 
-                  {visibleMessages < CHAT_MESSAGES.length && (
+                  {visibleMessages < chatMessages.length && (
                     <div className="flex justify-start">
                       <div className="bg-gray-800 rounded-2xl rounded-bl-md px-4 py-3">
                         <div className="flex gap-1">
@@ -175,7 +174,7 @@ export default function Hero() {
                 <div className="bg-gray-950 px-4 py-3 border-t border-gray-800">
                   <div className="flex items-center gap-2">
                     <div className="flex-1 h-10 rounded-full bg-gray-800 border border-gray-700 px-4 flex items-center">
-                      <span className="text-sm text-gray-500">Type a message...</span>
+                      <span className="text-sm text-gray-500">{t.hero.chatPlaceholder}</span>
                     </div>
                     <div className="h-10 w-10 rounded-full bg-[#25D366] flex items-center justify-center">
                       <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -188,7 +187,7 @@ export default function Hero() {
 
               {/* Floating badge */}
               <div className="absolute -bottom-4 -right-4 bg-[#25D366] text-white text-sm font-medium px-4 py-2 rounded-full shadow-lg shadow-[#25D366]/20">
-                ✨ 100% Automated
+                {t.hero.chatBadge}
               </div>
             </div>
           </motion.div>

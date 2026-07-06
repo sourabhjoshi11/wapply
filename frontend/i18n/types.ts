@@ -13,6 +13,11 @@ export interface Translation {
     description: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    chatMessages: Array<{ text: string; sender: string; delay: number }>;
+    chatBotName: string;
+    chatBotStatus: string;
+    chatPlaceholder: string;
+    chatBadge: string;
   };
   features: {
     title: string;

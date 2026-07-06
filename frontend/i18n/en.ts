@@ -17,6 +17,17 @@ const en = {
       'Customers browse your catalog, place orders, and book appointments — all on WhatsApp. You just accept.',
     ctaPrimary: 'Get Started Now →',
     ctaSecondary: 'Watch Demo',
+    chatMessages: [
+      { text: 'Hello! Do you have Biscuits?', sender: 'customer', delay: 0 },
+      { text: 'Yes! 🎉 You can check our catalog here', sender: 'bot', delay: 1500 },
+      { text: 'I want 2 packets of ₹10 ones', sender: 'customer', delay: 3000 },
+      { text: 'Order confirmed!', sender: 'bot', delay: 4500 },
+      { text: '✅ Order #ABC123 placed\nYour order is on the way', sender: 'system', delay: 6000 },
+    ],
+    chatBotName: 'Wapply Bot',
+    chatBotStatus: 'Online',
+    chatPlaceholder: 'Type a message...',
+    chatBadge: '✨ 100% Automated',
   },
 
   // Features

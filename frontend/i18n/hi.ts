@@ -16,6 +16,17 @@ const hi: Translation = {
       'ग्राहक खुद कैटलॉग देखें, ऑर्डर करें, अपॉइंटमेंट बुक करें — आपको सिर्फ WhatsApp पर स्वीकार करना है',
     ctaPrimary: 'अभी शुरू करें →',
     ctaSecondary: 'डेमो देखें',
+    chatMessages: [
+      { text: 'Namaste! Kya aapke paas Biscuit hai?', sender: 'customer', delay: 0 },
+      { text: 'Ji haan! 🎉 Aap catalog dekh sakte hain', sender: 'bot', delay: 1500 },
+      { text: 'Mujhe 2 packet chahiye, ₹10 wale', sender: 'customer', delay: 3000 },
+      { text: 'Order confirm hai!', sender: 'bot', delay: 4500 },
+      { text: '✅ Order #ABC123 placed\nAapka order aa raha hai', sender: 'system', delay: 6000 },
+    ],
+    chatBotName: 'वाप्लाई बॉट',
+    chatBotStatus: 'ऑनलाइन',
+    chatPlaceholder: 'एक संदेश लिखें...',
+    chatBadge: '✨ 100% स्वचालित',
   },
   features: {
     title: 'सब कुछ एक प्लेटफॉर्म में',
