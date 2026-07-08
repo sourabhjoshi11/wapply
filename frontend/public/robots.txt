@@ -1,5 +1,3 @@
-# https://www.robotstxt.org/robotstxt.html
+# Block all crawlers — the frontend is for authenticated users only.
 User-agent: *
-Allow: /
-
-Sitemap: https://wapply.store/sitemap.xml
+Disallow: /

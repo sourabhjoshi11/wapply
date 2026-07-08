@@ -2,7 +2,9 @@ import axios from 'axios';
 import { supabase } from './supabase';
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+  /** On Vercel, API is proxied via rewrites (next.config.ts) so use relative URL.
+   *  On local dev, NEXT_PUBLIC_API_URL should be http://localhost:8000. */
+  baseURL: process.env.NEXT_PUBLIC_API_URL || '',
   headers: {
     'Content-Type': 'application/json',
   },
