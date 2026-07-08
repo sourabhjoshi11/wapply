@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://wapply.in'),
+  metadataBase: new URL('https://wapply.store'),
   title: {
     default: APP_DEFAULT_TITLE,
     template: '%s | Wapply',
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     siteName: APP_NAME,
     title: APP_DEFAULT_TITLE,
     description: APP_DESCRIPTION,
-    url: 'https://wapply.in/',
+    url: 'https://wapply.store/',
     images: [
       {
         url: '/og-image.png',
@@ -84,10 +84,10 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   alternates: {
-    canonical: 'https://wapply.in/',
+    canonical: 'https://wapply.store/',
     languages: {
-      en: 'https://wapply.in/',
-      hi: 'https://wapply.in/hi',
+      en: 'https://wapply.store/',
+      hi: 'https://wapply.store/hi',
     },
   },
   formatDetection: {
@@ -111,9 +111,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="alternate" hrefLang="en" href="https://wapply.in/" />
-        <link rel="alternate" hrefLang="hi" href="https://wapply.in/hi" />
-        <link rel="alternate" hrefLang="x-default" href="https://wapply.in/" />
+        <link rel="alternate" hrefLang="en" href="https://wapply.store/" />
+        <link rel="alternate" hrefLang="hi" href="https://wapply.store/hi" />
+        <link rel="alternate" hrefLang="x-default" href="https://wapply.store/" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <Providers>{children}</Providers>

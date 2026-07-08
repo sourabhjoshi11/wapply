@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://wapply.in/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://wapply.in/"/>
-    <xhtml:link rel="alternate" hreflang="hi" href="https://wapply.in/hi"/>
+    <loc>https://wapply.store/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wapply.store/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://wapply.store/hi"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wapply.in/login</loc>
+    <loc>https://wapply.store/login</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://wapply.in/forgot-password</loc>
+    <loc>https://wapply.store/forgot-password</loc>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>

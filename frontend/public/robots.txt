@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wapply.in/sitemap.xml
+Sitemap: https://wapply.store/sitemap.xml

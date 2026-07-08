@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Wapply - WhatsApp Business Bot for Indian Small Businesses',
     description:
       "Apni shop ka WhatsApp bot banayein 10 minutes mein. Customers khud catalog dekhein, order karein, appointment book karein. Free trial available.",
-  url: 'https://wapply.in/',
+  url: 'https://wapply.store/',
     type: 'website',
     images: [
       {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   alternates: {
-    canonical: 'https://wapply.in/',
+    canonical: 'https://wapply.store/',
   },
 };
 
@@ -40,7 +40,7 @@ const jsonLd = {
   operatingSystem: 'Web',
   description:
     'India\'s simplest WhatsApp business solution. Turn your shop into a WhatsApp bot in 10 minutes. Customers browse catalog, place orders, and book appointments — all on WhatsApp.',
-  url: 'https://wapply.in/',
+  url: 'https://wapply.store/',
   offers: [
     {
       '@type': 'Offer',
