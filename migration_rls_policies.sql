@@ -1,6 +1,9 @@
 -- ═══════════════════════════════════════════════════════════════════════════
 -- RLS POLICIES — Wapply
 -- Run this in Supabase SQL Editor (Dashboard → SQL Editor → New Query)
+--
+-- NOTE: Shops are linked to Supabase Auth users via owner_email, NOT a
+-- user_id column. RLS uses auth.email() to match, not auth.uid().
 -- ═══════════════════════════════════════════════════════════════════════════
 
 -- ── 1. Enable RLS on ALL tables ──────────────────────────────────────────
@@ -33,21 +36,21 @@ CREATE POLICY onboarding_leads_service_policy ON onboarding_leads
 CREATE POLICY orders_authenticated_select ON orders
   FOR SELECT TO authenticated
   USING (shop_id IN (
-    SELECT id FROM shops WHERE user_id = auth.uid()
+    SELECT id FROM shops WHERE owner_email = auth.email()::text
   ));
 
 -- ── 4. Authenticated users: shops (read own) ──────────────────────────
 
 CREATE POLICY shops_authenticated_select ON shops
   FOR SELECT TO authenticated
-  USING (user_id = auth.uid());
+  USING (owner_email = auth.email()::text);
 
 -- ── 5. Authenticated users: products (read own shop's products) ───────
 
 CREATE POLICY products_authenticated_select ON products
   FOR SELECT TO authenticated
   USING (shop_id IN (
-    SELECT id FROM shops WHERE user_id = auth.uid()
+    SELECT id FROM shops WHERE owner_email = auth.email()::text
   ));
 
 -- ── 6. Authenticated users: conversations (read own) ──────────────────
@@ -55,5 +58,5 @@ CREATE POLICY products_authenticated_select ON products
 CREATE POLICY conversations_authenticated_select ON conversations
   FOR SELECT TO authenticated
   USING (shop_id IN (
-    SELECT id FROM shops WHERE user_id = auth.uid()
+    SELECT id FROM shops WHERE owner_email = auth.email()::text
   ));
