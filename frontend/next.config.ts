@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.API_PROXY_TARGET || 'https://wapply-api.onrender.com'}/api/:path*`,
+        destination: `${process.env.API_PROXY_TARGET || 'https://wapply.onrender.com'}/api/:path*`,
       },
     ];
   },
