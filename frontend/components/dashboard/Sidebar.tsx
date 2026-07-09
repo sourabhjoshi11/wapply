@@ -103,7 +103,7 @@ export default function Sidebar({
           </div>
           <div className="min-w-0">
             <span className="text-lg font-bold text-white block leading-tight">
-              WE<span className="text-[#25D366]">AI</span>
+              Wapply
             </span>
             {shopName && (
               <span className="text-xs text-gray-500 truncate block">

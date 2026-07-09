@@ -17,7 +17,7 @@ export default function Footer() {
                 W
               </div>
               <span className="text-xl font-bold text-white">
-                WE<span className="text-[#25D366]">AI</span>
+                Wapply
               </span>
             </Link>
             <p className="text-sm text-gray-400 max-w-sm">

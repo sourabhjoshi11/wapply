@@ -1,0 +1,112 @@
+- generic [active] [ref=f4e1]:
+  - navigation [ref=f4e2]:
+    - generic [ref=f4e4]:
+      - link "W Wapply" [ref=f4e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f4e6]: W
+        - generic [ref=f4e7]: Wapply
+      - generic [ref=f4e8]:
+        - link "Features" [ref=f4e9] [cursor=pointer]:
+          - /url: "#features"
+        - link "Pricing" [ref=f4e10] [cursor=pointer]:
+          - /url: "#pricing"
+        - link "How It Works" [ref=f4e11] [cursor=pointer]:
+          - /url: "#how-it-works"
+      - generic [ref=f4e12]:
+        - button "हि" [ref=f4e13]:
+          - img [ref=f4e14]
+          - generic [ref=f4e17]: हि
+        - button "Logout" [ref=f4e18]:
+          - img
+          - text: Logout
+  - main [ref=f4e19]:
+    - generic [ref=f4e20]:
+      - generic [ref=f4e26]:
+        - complementary [ref=f4e27]:
+          - button "◀" [ref=f4e28]
+          - generic [ref=f4e29]:
+            - link "W WEAI Test General Store" [ref=f4e31] [cursor=pointer]:
+              - /url: /
+              - generic [ref=f4e32]: W
+              - generic [ref=f4e33]:
+                - generic [ref=f4e34]: WEAI
+                - generic [ref=f4e35]: Test General Store
+            - navigation [ref=f4e36]:
+              - button "Overview" [ref=f4e37]:
+                - img [ref=f4e38]
+                - generic [ref=f4e43]: Overview
+              - button "Orders" [ref=f4e44]:
+                - img [ref=f4e45]
+                - generic [ref=f4e49]: Orders
+              - button "Products" [ref=f4e50]:
+                - img [ref=f4e51]
+                - generic [ref=f4e55]: Products
+              - button "Customers" [ref=f4e56]:
+                - img [ref=f4e57]
+                - generic [ref=f4e62]: Customers
+              - button "Wallet" [ref=f4e63]:
+                - img [ref=f4e64]
+                - generic [ref=f4e67]: Wallet
+              - button "Billing" [ref=f4e68]:
+                - img [ref=f4e69]
+                - generic [ref=f4e71]: Billing
+              - button "Settings" [ref=f4e72]:
+                - img [ref=f4e73]
+                - generic [ref=f4e76]: Settings
+            - button "Logout" [ref=f4e78]:
+              - img [ref=f4e79]
+              - generic [ref=f4e82]: Logout
+        - generic [ref=f4e85]:
+          - generic [ref=f4e86]:
+            - generic [ref=f4e88]:
+              - generic [ref=f4e89]:
+                - generic [ref=f4e90]: Today's Orders
+                - img [ref=f4e92]
+              - paragraph [ref=f4e96]: "0"
+            - generic [ref=f4e98]:
+              - generic [ref=f4e99]:
+                - generic [ref=f4e100]: Today's Revenue
+                - img [ref=f4e102]
+              - paragraph [ref=f4e105]: ₹ 0
+            - generic [ref=f4e107]:
+              - generic [ref=f4e108]:
+                - generic [ref=f4e109]: Active Conversations
+                - img [ref=f4e111]
+              - paragraph [ref=f4e113]: "0"
+            - generic [ref=f4e115]:
+              - generic [ref=f4e116]:
+                - generic [ref=f4e117]: Wallet Balance
+                - img [ref=f4e119]
+              - paragraph [ref=f4e122]: ₹ 0
+              - paragraph [ref=f4e123]: ⚠️ Balance is low — please recharge
+          - generic [ref=f4e125]:
+            - heading "Recent Orders" [level=3] [ref=f4e126]
+            - paragraph [ref=f4e127]: No orders yet
+      - generic [ref=f4e129]:
+        - generic [ref=f4e130]:
+          - generic [ref=f4e131]:
+            - link "W WEAI" [ref=f4e132] [cursor=pointer]:
+              - /url: /
+              - generic [ref=f4e133]: W
+              - generic [ref=f4e134]: WEAI
+            - paragraph [ref=f4e135]: Your shop's digital partner
+          - generic [ref=f4e136]:
+            - heading "Quick Links" [level=4] [ref=f4e137]
+            - list [ref=f4e138]:
+              - listitem [ref=f4e139]:
+                - link "Privacy Policy" [ref=f4e140] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f4e141]:
+                - link "Terms of Service" [ref=f4e142] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=f4e143]:
+                - link "Contact Us" [ref=f4e144] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=f4e145]:
+            - heading "Support" [level=4] [ref=f4e146]
+            - list [ref=f4e147]:
+              - listitem [ref=f4e148]:
+                - link "WhatsApp Support" [ref=f4e149] [cursor=pointer]:
+                  - /url: https://wa.me/919999999999
+        - paragraph [ref=f4e151]: © 2026 Wapply. All rights reserved.
+  - alert [ref=f4e25]
