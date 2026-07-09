@@ -24,7 +24,7 @@ const en = {
       { text: 'Order confirmed!', sender: 'bot', delay: 4500 },
       { text: '✅ Order #ABC123 placed\nYour order is on the way', sender: 'system', delay: 6000 },
     ],
-    chatBotName: 'Wapply Bot',
+    chatBotName: 'Wapply',
     chatBotStatus: 'Online',
     chatPlaceholder: 'Type a message...',
     chatBadge: '✨ 24x7 Active',
@@ -45,7 +45,7 @@ const en = {
       },
       salon: {
         title: 'Salon Appointment Booking',
-        desc: 'Customers book appointments 24/7. Staff schedules auto-update.',
+        desc: 'Customers book appointments 24/7. Staff schedules update without any manual work.',
       },
       turf: {
         title: 'Turf & Venue Booking',
@@ -53,7 +53,7 @@ const en = {
       },
       languages: {
         title: '10+ Indian Languages',
-        desc: 'Bot speaks Hindi, English, Marathi, Gujarati, and more.',
+        desc: 'Works in Hindi, English, Marathi, Gujarati, and more.',
       },
       summary: {
         title: 'Daily Sales Summary',
@@ -135,7 +135,7 @@ const en = {
         'Everything in Standard',
         'Dedicated account manager',
         'Advanced analytics',
-        'White-label bot',
+        'White-label experience',
         'API access',
       ],
     },
@@ -148,7 +148,7 @@ const en = {
     title: 'Our Happy Merchants',
     items: [
       {
-        quote: 'We used to write orders by hand, now everything is automatic. Saves time and no more errors.',
+        quote: 'We used to write orders by hand, now everything works smoothly. Saves time and no more errors.',
         name: 'Ramesh Sharma',
         shop: 'Sharma Kirana Store',
       },
@@ -296,7 +296,7 @@ const en = {
     whatsappConnect: {
       title: 'WhatsApp Connect',
       info: 'Customers will message this number. Do not use your personal number — get a new SIM or use a spare number.',
-      botNumber: 'Bot WhatsApp Number',
+      botNumber: 'WhatsApp Number',
       botPlaceholder: '+91XXXXXXXXXX',
       sendOtp: 'Send OTP',
       otp: 'Enter OTP',
@@ -316,7 +316,7 @@ const en = {
       title: 'Wallet Recharge',
       planSummary: 'Plan Summary',
       freeTrial: '1 Month Free',
-      afterTrial: 'After trial: auto-deduct from wallet',
+      afterTrial: 'After trial: deducted from wallet',
       rechargeOptions: 'Recharge Options',
       recommended: 'Recommended',
       custom: 'Custom Amount',
@@ -324,11 +324,11 @@ const en = {
       note: '₹1 will be charged during trial — it will be refunded',
     },
     success: {
-      title: '🎉 Your Bot Is Live!',
+      title: '🎉 Your Shop Is Live!',
       share: 'Share with your customers',
       shareWhatsApp: 'Share on WhatsApp',
       downloadQrs: 'Download QR Codes',
-      checklist1: '✅ Bot is accepting messages',
+      checklist1: '✅ Orders are being received',
       checklist2: '✅ Order alerts will come on WhatsApp',
       checklist3: '✅ Manage from the dashboard',
       goToDashboard: 'Go to Dashboard →',
@@ -365,7 +365,7 @@ const en = {
     filter: 'Filter',
     recharge: 'Recharge Now 💳',
     dangerZone: 'Danger Zone',
-    pauseBot: 'Pause Bot',
+    pauseBot: 'Pause Service',
     deleteAccount: 'Delete Account',
     confirmDelete: 'Are you sure? This cannot be undone.',
     logout: 'Logout',

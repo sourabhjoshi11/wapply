@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 const APP_NAME = 'Wapply';
-const APP_DEFAULT_TITLE = 'Wapply - WhatsApp Business Bot for Indian Small Businesses';
+const APP_DEFAULT_TITLE = 'Wapply - More Orders, Less Work for Your Shop';
 const APP_DESCRIPTION =
-  "Apni shop ka WhatsApp bot banayein 10 minutes mein. Customers khud catalog dekhein, order karein, appointment book karein. India's simplest WhatsApp business solution.";
+  "Turn WhatsApp into your shop's ordering system. Customers browse your catalog, place orders, and book appointments — all without apps or downloads. For Indian shops, restaurants, salons, and services.";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -28,23 +28,21 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   keywords: [
-    'WhatsApp bot',
-    'WhatsApp business',
-    'shop automation',
-    'kirana store automation',
-    'India small business',
-    'WhatsApp ordering system',
+    'WhatsApp ordering',
+    'order on WhatsApp',
+    'online ordering for shops India',
     'restaurant ordering system',
-    'salon booking app',
-    'appointment booking WhatsApp',
-    'WhatsApp catalog',
-    'digital India',
-    'online ordering for shops',
-    'WhatsApp commerce',
+    'salon appointment booking',
+    'WhatsApp catalog for business',
     'small business tools India',
     'no app ordering',
-    'restaurant QR ordering',
+    'restaurant QR menu ordering',
     'turf booking system',
+    'WhatsApp commerce India',
+    'digital India small business',
+    'online store WhatsApp',
+    'kirana store online ordering',
+    'appointment booking WhatsApp',
   ],
   authors: [{ name: APP_NAME }],
   creator: APP_NAME,

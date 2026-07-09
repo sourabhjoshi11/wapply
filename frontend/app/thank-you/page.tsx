@@ -60,7 +60,7 @@ export default function ThankYouPage() {
           transition={{ delay: 0.4 }}
           className="text-gray-400 mb-6"
         >
-          Your WhatsApp bot is live. Redirecting you to home in {countdown}...
+          Your shop is set up! Redirecting you in {countdown}...
         </motion.p>
 
         {/* Progress bar */}

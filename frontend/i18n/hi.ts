@@ -23,7 +23,7 @@ const hi: Translation = {
       { text: 'Order confirm hai!', sender: 'bot', delay: 4500 },
       { text: '✅ Order #ABC123 placed\nAapka order aa raha hai', sender: 'system', delay: 6000 },
     ],
-    chatBotName: 'वाप्लाई बॉट',
+    chatBotName: 'वाप्लाई',
     chatBotStatus: 'ऑनलाइन',
     chatPlaceholder: 'एक संदेश लिखें...',
     chatBadge: '✨ 24x7 सक्रिय',
@@ -42,7 +42,7 @@ const hi: Translation = {
       },
       salon: {
         title: 'सैलून अपॉइंटमेंट बुकिंग',
-        desc: 'ग्राहक 24/7 अपॉइंटमेंट बुक करें। स्टाफ शेड्यूल ऑटो-अपडेट होता है।',
+        desc: 'ग्राहक 24/7 अपॉइंटमेंट बुक करें। स्टाफ शेड्यूल अपडेट होता है।',
       },
       turf: {
         title: 'टर्फ और वेन्यू बुकिंग',
@@ -50,7 +50,7 @@ const hi: Translation = {
       },
       languages: {
         title: '10+ भारतीय भाषाएँ',
-        desc: 'बॉट हिंदी, अंग्रेज़ी, मराठी, गुजराती और और भी भाषाएँ बोलता है।',
+        desc: 'हिंदी, अंग्रेज़ी, मराठी, गुजराती और और भी भाषाओं में काम करता है।',
       },
       summary: {
         title: 'दैनिक बिक्री सारांश',
@@ -128,7 +128,7 @@ const hi: Translation = {
         'स्टैंडर्ड की सभी सुविधाएं',
         'समर्पित खाता प्रबंधक',
         'उन्नत एनालिटिक्स',
-        'व्हाइट-लेबल बॉट',
+        'व्हाइट-लेबल अनुभव',
         'API एक्सेस',
       ],
     },
@@ -139,7 +139,7 @@ const hi: Translation = {
     title: 'हमारे संतुष्ट व्यापारी',
     items: [
       {
-        quote: 'पहले हाथ से ऑर्डर लिखते थे, अब सब ऑटोमैटिक। समय बचता है और गलतियाँ नहीं होती।',
+        quote: 'पहले हाथ से ऑर्डर लिखते थे, अब सब आसान हो गया। समय बचता है और गलतियाँ नहीं होती।',
         name: 'रमेश शर्मा',
         shop: 'शर्मा किराना स्टोर',
       },
@@ -271,7 +271,7 @@ const hi: Translation = {
     whatsappConnect: {
       title: 'WhatsApp कनेक्ट',
       info: 'यह नंबर ग्राहक मैसेज करेंगे। अपना पर्सनल नंबर मत दो — एक नया SIM लो या स्पेयर नंबर यूज़ करो।',
-      botNumber: 'बॉट WhatsApp नंबर',
+      botNumber: 'WhatsApp नंबर',
       botPlaceholder: '+91XXXXXXXXXX',
       sendOtp: 'OTP भेजें',
       otp: 'OTP डालें',
@@ -291,7 +291,7 @@ const hi: Translation = {
       title: 'वॉलेट रिचार्ज',
       planSummary: 'प्लान सारांश',
       freeTrial: '1 महीने मुफ्त',
-      afterTrial: 'ट्रायल के बाद: वॉलेट से ऑटो-डिडक्ट',
+      afterTrial: 'ट्रायल के बाद: वॉलेट से कटेगा',
       rechargeOptions: 'रिचार्ज विकल्प',
       recommended: 'सुझाया गया',
       custom: 'अपनी राशि',
@@ -299,11 +299,11 @@ const hi: Translation = {
       note: 'ट्रायल में ₹1 चार्ज होगा — रिफंड हो जाएगा',
     },
     success: {
-      title: '🎉 आपका बॉट लाइव है!',
+      title: '🎉 आपकी दुकान लाइव है!',
       share: 'अपने ग्राहकों के साथ शेयर करें',
       shareWhatsApp: 'WhatsApp पर शेयर करें',
       downloadQrs: 'QR कोड डाउनलोड करें',
-      checklist1: '✅ बॉट मैसेज स्वीकार कर रहा है',
+      checklist1: '✅ ऑर्डर आने शुरू हो गए हैं',
       checklist2: '✅ WhatsApp पर ऑर्डर अलर्ट आएंगे',
       checklist3: '✅ डैशबोर्ड से मैनेज करें',
       goToDashboard: 'डैशबोर्ड पर जाएं →',
@@ -338,7 +338,7 @@ const hi: Translation = {
     filter: 'फ़िल्टर',
     recharge: 'रिचार्ज करें 💳',
     dangerZone: 'खतरा क्षेत्र',
-    pauseBot: 'बॉट रोकें',
+    pauseBot: 'सेवा रोकें',
     deleteAccount: 'खाता हटाएं',
     confirmDelete: 'क्या आपको यकीन है? इसे पूर्ववत नहीं किया जा सकता।',
     logout: 'लॉगआउट',
