@@ -35,5 +35,6 @@ Thumbs.db
 # Playwright recordings
 .playwright-mcp/
 
-# Screenshots & temp
-onboarding-fullpage.png
+# Screenshots & temp (but keep public OG image)
+*.png
+!frontend/public/og-image.png
