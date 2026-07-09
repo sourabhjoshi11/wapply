@@ -11,10 +11,10 @@ const en = {
 
   // Hero
   hero: {
-    headline: 'Turn Your Shop Into a WhatsApp Bot',
+    headline: 'Get More Orders With Less Effort',
     subheadline: 'Set Up in 10 Minutes — Completely Free',
     description:
-      'Customers browse your catalog, place orders, and book appointments — all on WhatsApp. You just accept.',
+      'Your customers can browse, order, and book appointments anytime. You just focus on serving them.',
     ctaPrimary: 'Get Started Now →',
     ctaSecondary: 'Watch Demo',
     chatMessages: [
@@ -27,7 +27,7 @@ const en = {
     chatBotName: 'Wapply Bot',
     chatBotStatus: 'Online',
     chatPlaceholder: 'Type a message...',
-    chatBadge: '✨ 100% Automated',
+    chatBadge: '✨ 24x7 Active',
   },
 
   // Features
@@ -36,7 +36,7 @@ const en = {
     subtitle: 'Everything your business needs — all in one place',
     items: {
       catalog: {
-        title: 'Auto Catalog Ordering',
+        title: 'Catalog Ordering',
         desc: 'Customers see your full catalog and place orders directly on WhatsApp. No app needed.',
       },
       restaurant: {
@@ -57,7 +57,7 @@ const en = {
       },
       summary: {
         title: 'Daily Sales Summary',
-        desc: 'Auto-generated sales report every evening on WhatsApp.',
+        desc: 'Daily sales report every evening on WhatsApp.',
       },
       wallet: {
         title: 'Wallet Based Billing',
@@ -73,7 +73,7 @@ const en = {
   // How It Works
   howItWorks: {
     title: 'Three Simple Steps',
-    subtitle: 'Go live with your WhatsApp bot in just 10 minutes',
+    subtitle: 'Get your shop ready in just 10 minutes',
     steps: [
       {
         title: 'Register Your Business',
@@ -86,7 +86,7 @@ const en = {
         time: '5 min',
       },
       {
-        title: 'Bot Goes Live — Customers Start Ordering',
+        title: 'Orders Start Coming In',
         desc: 'Share the number with customers and orders start flowing in',
         time: 'Instant',
       },
@@ -167,7 +167,7 @@ const en = {
 
   // Footer
   footer: {
-    tagline: 'India\'s simplest WhatsApp business solution',
+    tagline: 'Your shop\'s digital partner',
     privacyPolicy: 'Privacy Policy',
     terms: 'Terms of Service',
     contact: 'Contact Us',

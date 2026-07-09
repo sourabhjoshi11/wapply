@@ -10,10 +10,10 @@ const hi: Translation = {
     login: 'लॉगिन',
   },
   hero: {
-    headline: 'अपनी दुकान का WhatsApp Bot बनाएं',
-    subheadline: '10 मिनट में — बिल्कुल मुफ्त शुरू करें',
+    headline: 'ज़्यादा ऑर्डर, कम मेहनत',
+    subheadline: '10 मिनट में शुरू करें — बिल्कुल मुफ्त',
     description:
-      'ग्राहक खुद कैटलॉग देखें, ऑर्डर करें, अपॉइंटमेंट बुक करें — आपको सिर्फ WhatsApp पर स्वीकार करना है',
+      'आपके ग्राहक खुद कैटलॉग देखें, ऑर्डर करें, अपॉइंटमेंट बुक करें। आपको बस स्वीकार करना है।',
     ctaPrimary: 'अभी शुरू करें →',
     ctaSecondary: 'डेमो देखें',
     chatMessages: [
@@ -26,14 +26,14 @@ const hi: Translation = {
     chatBotName: 'वाप्लाई बॉट',
     chatBotStatus: 'ऑनलाइन',
     chatPlaceholder: 'एक संदेश लिखें...',
-    chatBadge: '✨ 100% स्वचालित',
+    chatBadge: '✨ 24x7 सक्रिय',
   },
   features: {
     title: 'सब कुछ एक प्लेटफॉर्म में',
     subtitle: 'जो बिज़नेस चाहिए वो सब — एक ही जगह',
     items: {
       catalog: {
-        title: 'ऑटो कैटलॉग ऑर्डरिंग',
+        title: 'कैटलॉग ऑर्डरिंग',
         desc: 'ग्राहक आपका पूरा कैटलॉग देखें और सीधे WhatsApp पर ऑर्डर करें। कोई ऐप नहीं चाहिए।',
       },
       restaurant: {
@@ -54,7 +54,7 @@ const hi: Translation = {
       },
       summary: {
         title: 'दैनिक बिक्री सारांश',
-        desc: 'हर शाम WhatsApp पर ऑटो-जनरेटेड बिक्री रिपोर्ट।',
+        desc: 'हर शाम WhatsApp पर दैनिक बिक्री रिपोर्ट।',
       },
       wallet: {
         title: 'वॉलेट आधारित बिलिंग',
@@ -68,7 +68,7 @@ const hi: Translation = {
   },
   howItWorks: {
     title: 'तीन सरल कदम',
-    subtitle: 'सिर्फ 10 मिनट में अपना WhatsApp बॉट लाइव करें',
+    subtitle: 'सिर्फ 10 मिनट में अपनी दुकान तैयार करें',
     steps: [
       {
         title: 'अपना बिज़नेस रजिस्टर करें',
@@ -81,8 +81,8 @@ const hi: Translation = {
         time: '5 मिनट',
       },
       {
-        title: 'बॉट लाइव — ग्राहक ऑर्डर करें',
-        desc: 'ग्राहकों को नंबर शेयर करें और ऑर्डर आने लगें',
+        title: 'ऑर्डर आने शुरू हो जाएँ',
+        desc: 'ग्राहकों को नंबर दें और ऑर्डर आने शुरू हो जाएँ',
         time: 'तुरंत',
       },
     ],
@@ -156,7 +156,7 @@ const hi: Translation = {
     ],
   },
   footer: {
-    tagline: 'भारत का सबसे सरल WhatsApp बिज़नेस समाधान',
+    tagline: 'आपकी दुकान का डिजिटल साथी',
     privacyPolicy: 'गोपनीयता नीति',
     terms: 'सेवा की शर्तें',
     contact: 'संपर्क करें',

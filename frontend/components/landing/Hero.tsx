@@ -51,7 +51,7 @@ export default function Hero() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-sm font-medium mb-6">
                 <span className="h-2 w-2 rounded-full bg-[#25D366] animate-pulse" />
-                WhatsApp Business Bot
+                Your Shop, Always Open
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
