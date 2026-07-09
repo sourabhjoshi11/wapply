@@ -43,7 +43,11 @@ test-*
 !frontend/public/og-image.png
 
 # Playwright test artifacts
-*snapshot*.txt
-login-page.txt
-test.mjs
-onboarding-console.txt
+/login-page.txt
+/landing-snapshot.txt
+/login-snapshot.txt
+/onboarding-snapshot.txt
+/onboarding-console.txt
+/signup-snapshot.txt
+/dashboard-snapshot.txt
+/test.mjs
