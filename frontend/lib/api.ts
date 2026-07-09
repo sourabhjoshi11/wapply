@@ -1,10 +1,20 @@
 import axios from 'axios';
 import { supabase } from './supabase';
 
+/** Detect if we're running on a production domain (Vercel proxy active). */
+function getBaseURL(): string {
+  if (typeof window === 'undefined') return '';
+  // If the page is served from a real domain (not localhost), use relative URLs
+  // so the Vercel proxy (next.config.ts rewrites) handles /api/*.
+  if (!window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1')) {
+    return '';
+  }
+  // Local dev: use the env var or fall back to localhost:8000
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+}
+
 const api = axios.create({
-  /** On Vercel, API is proxied via rewrites (next.config.ts) so use relative URL.
-   *  On local dev, NEXT_PUBLIC_API_URL should be http://localhost:8000. */
-  baseURL: process.env.NEXT_PUBLIC_API_URL || '',
+  baseURL: getBaseURL(),
   headers: {
     'Content-Type': 'application/json',
   },
