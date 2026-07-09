@@ -41,3 +41,9 @@ test-*
 # Screenshots & temp (but keep public OG image)
 *.png
 !frontend/public/og-image.png
+
+# Playwright test artifacts
+*snapshot*.txt
+login-page.txt
+test.mjs
+onboarding-console.txt

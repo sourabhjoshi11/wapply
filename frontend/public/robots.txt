@@ -1,3 +1,0 @@
-# Block all crawlers — the frontend is for authenticated users only.
-User-agent: *
-Disallow: /
