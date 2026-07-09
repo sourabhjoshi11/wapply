@@ -90,7 +90,7 @@ export function generateOrderCode(): string {
 }
 
 export const BUSINESS_TYPE_LABELS: Record<string, string> = {
-  shop: 'Shop / Kirana / Bakery',
+  shop: 'Shop / Grocery / Bakery',
   restaurant: 'Restaurant',
   salon: 'Salon / Clinic / Spa',
   turf: 'Turf / Hotel / Banquet',
@@ -104,7 +104,7 @@ export const BUSINESS_TYPE_ICONS: Record<string, string> = {
 };
 
 export const SHOP_CATEGORIES = [
-  'Kirana',
+  'Grocery Store',
   'Bakery',
   'Boutique',
   'Tiffin',

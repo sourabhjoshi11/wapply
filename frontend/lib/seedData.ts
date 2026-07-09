@@ -21,7 +21,7 @@ export type SeedAsset = {
   category: string;
 };
 
-// ── Kirana / General Shop ───────────────────────────────
+// ── Grocery Store / General Shop ─────────────────────────
 
 export const SHOP_SEED_DATA: SeedProduct[] = [
   // Snacks
@@ -290,13 +290,13 @@ export const SEED_DATA_BY_TYPE = {
 // Used in CatalogSetup to show category-specific suggestions
 
 export const SHOP_SEED_DATA_BY_CATEGORY: Record<string, SeedProduct[]> = {
-  Kirana: SHOP_SEED_DATA,
+  'Grocery Store': SHOP_SEED_DATA,
   Bakery: BAKERY_SEED_DATA,
   Boutique: BOUTIQUE_SEED_DATA,
   'Sweet Shop': SWEET_SHOP_SEED_DATA,
   Tiffin: TIFFIN_SEED_DATA,
   Pharmacy: PHARMACY_SEED_DATA,
-  Other: SHOP_SEED_DATA, // fallback to kirana
+  Other: SHOP_SEED_DATA, // fallback to grocery store
 };
 
 export type BusinessTypeKey = keyof typeof SEED_DATA_BY_TYPE;

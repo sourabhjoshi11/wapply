@@ -129,7 +129,7 @@ export default function CatalogSetup() {
 
   const productNames = useMemo(() => existingNames(products), [products]);
 
-  const category = basicDetails?.category || 'Kirana';
+  const category = basicDetails?.category || 'Grocery Store';
   const seedItems = SHOP_SEED_DATA_BY_CATEGORY[category] || null;
 
   const handleSuggestedConfirm = (selected: SeedProduct[]) => {

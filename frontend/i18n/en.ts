@@ -188,7 +188,7 @@ const en = {
     selectBusinessType: {
       title: 'Select Your Business Type',
       shop: {
-        title: '🛒 Shop / Kirana / Bakery',
+        title: '🛒 Shop / Grocery / Bakery',
         desc: 'Sell products to customers',
       },
       restaurant: {
