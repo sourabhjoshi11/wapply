@@ -75,6 +75,8 @@ export default function BasicDetails() {
     resolver: zodResolver(schema),
     defaultValues: {
       owner_whatsapp: '+91',
+      category: '',
+      language: '',
     },
   });
 

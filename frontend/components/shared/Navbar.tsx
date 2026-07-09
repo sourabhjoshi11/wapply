@@ -63,7 +63,7 @@ export default function Navbar() {
                 W
               </div>
               <span className="text-xl font-bold text-white">
-                WE<span className="text-[#25D366]">AI</span>
+                <span className="text-[#25D366]">W</span>apply
               </span>
             </Link>
             <Link
@@ -95,7 +95,7 @@ export default function Navbar() {
               W
             </div>
             <span className="text-xl font-bold text-white">
-              WE<span className="text-[#25D366]">AI</span>
+              <span className="text-[#25D366]">W</span>apply
             </span>
           </Link>
 
